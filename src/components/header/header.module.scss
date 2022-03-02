@@ -43,7 +43,9 @@
     &__item {
       font-size: 1.8rem;
 
-
+      @media screen and (max-width: 500px) {
+        font-size: 1.4rem;
+      }
     }
 
     &__link {
@@ -72,5 +74,9 @@
     font-size: 1.8rem;
     color: #1390E5;
     cursor: pointer;
+
+    @media screen and (max-width: 500px) {
+      font-size: 1.4rem;
+    }
   }
 }

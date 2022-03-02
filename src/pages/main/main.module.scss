@@ -1,8 +1,8 @@
 .main {
   background: #FAFAFA;
-  height: 100vh;
+  min-height: 100vh;
 
   &-content {
-    padding-top: 4rem;
+    padding: 4rem 1rem;
   }
 }
