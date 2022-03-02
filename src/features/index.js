@@ -1,3 +1,3 @@
 import authReducer from './auth/authSlice'
-
-export { authReducer }
+import resultsRedducer from './videos/videosSlice'
+export { authReducer, resultsRedducer }

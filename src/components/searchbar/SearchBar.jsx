@@ -3,7 +3,12 @@ import classes from './searchbar.module.scss'
 import { Icon } from '../'
 import FavPopup from '../favorites-popup/FavPopup'
 
-const SearchBar = ({ icon }) => {
+const SearchBar = ({
+	icon,
+	onChange = () => {},
+	onSubmit = () => {},
+	value,
+}) => {
 	const [isActivePopup, setIsActivePopup] = useState(false)
 
 	useEffect(() => {
@@ -13,12 +18,14 @@ const SearchBar = ({ icon }) => {
 	}, [isActivePopup])
 
 	return (
-		<form className={classes['searchbar']}>
+		<form className={classes['searchbar']} onSubmit={onSubmit}>
 			<div className={classes['searchbar-wrap']}>
 				<input
 					type="text"
 					className={classes['searchbar__input']}
 					placeholder="Что хотите посмотреть?"
+					onChange={onChange}
+					value={value || ''}
 				/>
 				{icon && (
 					<Icon
