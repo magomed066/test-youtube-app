@@ -1,16 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, TextField } from '../../components'
 import classes from './login.module.scss'
 import Logo from '../../assets/sibdev-logo.png'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../../features/auth/authSlice'
 
 const Login = () => {
 	const [isShowPassword, setIsShowPassword] = useState(false)
 	const [formData, setFormData] = useState({
-		login: '',
+		email: '',
 		password: '',
 	})
 
-	const { login, password } = formData
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const { user, isLoading } = useSelector((state) => state.auth)
+
+	const { email, password } = formData
+
+	useEffect(() => {
+		if (user) {
+			navigate('/main/search')
+		}
+	}, [user])
 
 	const switchPass = () => setIsShowPassword((prev) => !prev)
 
@@ -21,8 +34,10 @@ const Login = () => {
 		}))
 	}
 
-	const submitHandler = (e) => {
+	const submitHandler = async (e) => {
 		e.preventDefault()
+
+		dispatch(login({ email, password }))
 	}
 
 	return (
@@ -38,9 +53,9 @@ const Login = () => {
 					<TextField
 						label="Логин"
 						placeholder="Введите"
-						value={login}
+						value={email}
 						onChange={changeHandler}
-						name="login"
+						name="email"
 					/>
 					<TextField
 						label="Пароль"
@@ -57,7 +72,7 @@ const Login = () => {
 						variant="primary"
 						classNames={classes['card-form__btn']}
 					>
-						Войти
+						{isLoading ? 'Загурзка...' : 'Войти'}
 					</Button>
 				</form>
 			</div>

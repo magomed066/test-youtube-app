@@ -16,7 +16,6 @@ export const search = createAsyncThunk(
 		try {
 			const data = await youtubeService.search(query)
 
-			console.log(data)
 			return { query, data: data?.items }
 		} catch (error) {
 			const message =

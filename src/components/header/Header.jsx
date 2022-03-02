@@ -2,8 +2,11 @@ import React from 'react'
 import classes from './header.module.scss'
 import Logo from '../../assets/sibdev-logo.png'
 import { NavLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../features/auth/authSlice'
 
 const Header = () => {
+	const dispatch = useDispatch()
 	return (
 		<div className={classes['header']}>
 			<div className="container">
@@ -41,7 +44,12 @@ const Header = () => {
 							</NavLink>
 						</li>
 					</ul>
-					<div className={classes['header__logout']}>Выход</div>
+					<div
+						className={classes['header__logout']}
+						onClick={() => dispatch(logout())}
+					>
+						Выход
+					</div>
 				</div>
 			</div>
 		</div>

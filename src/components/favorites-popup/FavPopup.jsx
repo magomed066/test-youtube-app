@@ -9,7 +9,7 @@ const FavPopup = () => {
 				<p className={classes['popup__text']}>
 					Поиск сохранен в разделе «Избранное»
 				</p>
-				<Link to="/main/favorites" className={classes['popup__link']}>
+				<Link to="/main/favorite" className={classes['popup__link']}>
 					Перейти в избранное
 				</Link>
 			</div>

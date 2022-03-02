@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import classes from './searchbar.module.scss'
 import { Icon } from '../'
 import FavPopup from '../favorites-popup/FavPopup'
+import { useDispatch, useSelector } from 'react-redux'
+import { addToFav } from '../../features/favorite/favoriteSlice'
 
 const SearchBar = ({
 	icon,
@@ -10,12 +12,31 @@ const SearchBar = ({
 	value,
 }) => {
 	const [isActivePopup, setIsActivePopup] = useState(false)
+	const dispatch = useDispatch()
+	const { user } = useSelector((state) => state.auth)
 
-	useEffect(() => {
-		if (isActivePopup) {
-			setTimeout(() => setIsActivePopup(false), 4000)
+	// useEffect(() => {
+	// 	if (isActivePopup) {
+	// 		setTimeout(() => setIsActivePopup(false), 4000)
+	// 	}
+
+	//   return () => {
+
+	//   }
+	// }, [isActivePopup])
+
+	const addQueryToFav = (q) => {
+		setIsActivePopup((prev) => !prev)
+
+		const data = {
+			query: q,
+			uid: user.uid,
 		}
-	}, [isActivePopup])
+
+		if (q.length) {
+			dispatch(addToFav(data))
+		}
+	}
 
 	return (
 		<form className={classes['searchbar']} onSubmit={onSubmit}>
@@ -33,7 +54,9 @@ const SearchBar = ({
 						height={20}
 						icon="heart"
 						color="#1390E5"
-						onClick={() => setIsActivePopup((prev) => !prev)}
+						onClick={() => {
+							addQueryToFav(value)
+						}}
 					/>
 				)}
 				{isActivePopup && <FavPopup />}

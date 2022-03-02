@@ -8,7 +8,7 @@ class YoutubeService {
 				params: {
 					part: 'snippet',
 					maxResults: 6,
-					key: 'AIzaSyAHRdZZCvdBQx54nwmj61uF9qZ5a_fcCTY',
+					key: process.env.REACT_APP_YOUTUBE_API_KEY,
 					q: query,
 				},
 			},
