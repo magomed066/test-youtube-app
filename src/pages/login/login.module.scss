@@ -1,0 +1,58 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 500px) {
+    padding: 0 1rem;
+  }
+
+
+  &-card {
+    max-width: 51rem;
+    width: 100%;
+
+    border: 1px solid rgba(39, 39, 39, 0.1);
+    border-radius: 1rem;
+    padding: 4rem 8.8rem 6rem 8.8rem;
+
+    @media screen and (max-width: 500px) {
+      padding: 4rem 1rem 6rem 1rem;
+    }
+
+    text-align: center;
+
+    & .card {
+      &-logo {
+        text-align: center;
+
+        &__item {
+          width: 8.8rem;
+          height: 8.8rem;
+        }
+      }
+
+      &__title {
+        font-size: 1.8rem;
+        font-weight: 500;
+        margin: 3.2rem 0 2rem 0;
+      }
+
+      &-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+
+        &__btn {
+          width: 17.6rem;
+          margin: 0 auto;
+          margin-top: 2rem;
+        }
+      }
+    }
+  }
+}

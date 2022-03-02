@@ -1,0 +1,61 @@
+.textfield {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  gap: .4rem;
+  max-width: 33.4rem;
+  width: 100%;
+
+
+  label {
+    color: rgba(23, 23, 25, 0.3);
+    font-size: 1.6rem;
+  }
+
+  &-wrap {
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    width: 100%;
+
+    svg {
+      position: absolute;
+      right: 1.5rem;
+      cursor: pointer;
+      z-index: 999;
+    }
+  }
+
+  &__item {
+    border: 1px solid rgba(126, 126, 126, 0.2);
+    box-sizing: border-box;
+    border-radius: 1rem;
+    padding: 1.2rem 4.5rem 1.2rem 1.5rem;
+    font-weight: normal;
+    width: 100%;
+    transition: all .1s;
+
+    color: #272727;
+    font-size: 2rem;
+
+    &::placeholder {
+      color: rgba(23, 23, 25, 0.3);
+    }
+
+    &:focus {
+      background: rgba(197, 228, 249, 0.3);
+      border: 1px solid #1390E5;
+
+      &~svg {
+        stroke: #1390E5;
+      }
+    }
+
+    &~svg {
+      stroke: #D1D1D1;
+    }
+  }
+
+}
