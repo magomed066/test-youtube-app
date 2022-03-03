@@ -1,6 +1,5 @@
 import authReducer from './auth/authSlice'
-import resultsRedducer from './videos/videosSlice'
-import favoriteReducer from './favorite/favoriteSlice'
 import modalReducer from './modal/modalSlice'
-
-export { authReducer, resultsRedducer, favoriteReducer, modalReducer }
+import videosReducer from './videos/videosSlice'
+import favsReducer from './favs/favsSlice'
+export { authReducer, modalReducer, videosReducer, favsReducer }

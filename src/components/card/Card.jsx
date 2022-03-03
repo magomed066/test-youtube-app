@@ -3,7 +3,7 @@ import classes from './card.module.scss'
 import Preview from '../../assets/preview.png'
 
 const Card = ({ item }) => {
-	const { description, thumbnails, title } = item.snippet
+	const { description, thumbnails, title } = item?.snippet || {}
 	return (
 		<div className={classes['card']}>
 			<img

@@ -4,7 +4,7 @@ import classes from './login.module.scss'
 import Logo from '../../assets/sibdev-logo.png'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../../features/auth/authSlice'
+import { login, reset } from '../../features/auth/authSlice'
 
 const Login = () => {
 	const [isShowPassword, setIsShowPassword] = useState(false)
@@ -15,15 +15,22 @@ const Login = () => {
 
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const { user, isLoading } = useSelector((state) => state.auth)
+	const { user, isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.auth,
+	)
 
 	const { email, password } = formData
 
 	useEffect(() => {
-		if (user) {
+		if (isError) {
+			alert(message)
+		}
+		if (user || isSuccess) {
 			navigate('/main/search')
 		}
-	}, [user])
+
+		dispatch(reset())
+	}, [user, isSuccess, isError, message, navigate, dispatch])
 
 	const switchPass = () => setIsShowPassword((prev) => !prev)
 

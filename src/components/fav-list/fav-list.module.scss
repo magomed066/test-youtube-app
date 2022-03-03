@@ -16,10 +16,6 @@
       border-radius: 1rem 1rem 0 0;
     }
 
-    // &:last-child {
-    //   border-radius: 0 0 1rem 1rem;
-    // }
-
     &:not(:last-child) {
       border-bottom: 1px solid #F1F1F1;
     }
@@ -28,6 +24,11 @@
       display: flex;
       align-items: center;
       gap: 3rem;
+
+      @media screen and (max-width: 500px) {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
 
       & .delete {
         color: #FF0000;

@@ -1,16 +1,33 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { FavList, Spinner } from '../../components'
-import { getFavs } from '../../features/favorite/favoriteSlice'
+import { getFavs, reset } from '../../features/favs/favsSlice'
 import classes from './favorite.module.scss'
 
 const Favorite = () => {
 	const dispatch = useDispatch()
 	const { user } = useSelector((state) => state.auth)
-	const { isLoading, list } = useSelector((state) => state.favorite)
+	const { isLoading, list, isError, isSuccess, message } = useSelector(
+		(state) => state.favs,
+	)
+
+	// useEffect(() => {
+	// 	if (isError) {
+	// 		alert(message)
+	// 		dispatch(reset())
+	// 	}
+
+	// 	if (isSuccess) {
+	// 		dispatch(reset())
+	// 	}
+	// }, [isError, isSuccess, message])
 
 	useEffect(() => {
 		dispatch(getFavs(user.uid))
+
+		return () => {
+			dispatch(reset())
+		}
 	}, [])
 
 	if (isLoading) {
@@ -21,7 +38,6 @@ const Favorite = () => {
 		<div className={classes['favorite']}>
 			{list.length ? (
 				<>
-					{' '}
 					<h1 className={classes['favorite__title']}>Избранное</h1>
 					<div className={classes['favorite-content']}>
 						<FavList items={list} />

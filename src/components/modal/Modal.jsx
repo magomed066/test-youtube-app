@@ -5,9 +5,7 @@ import { Select, TextField } from '../../components'
 import Button from '../button/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { close } from '../../features/modal/modalSlice'
-import { reset } from '../../features/favorite/favoriteSlice'
-import { addToFav } from '../../features/favorite/favoriteSlice'
-import Spinner from '../spinner/Spinner'
+import { addToFav, clearItem, updateFav } from '../../features/favs/favsSlice'
 
 const sortData = [
 	{ id: 1, name: 'Дата', value: 'date' },
@@ -29,23 +27,47 @@ const ModalContent = () => {
 	const { maxResults, query, name } = formData
 
 	const dispatch = useDispatch()
-	const { isLoading, isError, message, isSuccess } = useSelector(
-		(state) => state.favorite,
-	)
-	const { searchValue } = useSelector((state) => state.results)
+
 	const { user } = useSelector((state) => state.auth)
+	const { searchValue } = useSelector((state) => state.videos)
+	const { isLoading, isSuccess, isError, message, updating, item, list } =
+		useSelector((state) => state.favs)
+
+	useEffect(() => {
+		if (searchValue) {
+			setFormData((prev) => ({
+				...prev,
+				query: searchValue,
+			}))
+		}
+	}, [searchValue])
+
+	useEffect(() => {
+		if (updating && item) {
+			console.log(item)
+			setFormData((prev) => ({
+				...prev,
+				maxResults: item.maxResults,
+				query: item.query ? item.query : searchValue,
+				name: item.name,
+				sort: item.sort,
+			}))
+		}
+
+		// if (isSuccess) {
+		// 	dispatch(close())
+		// }
+	}, [updating, item, isSuccess])
 
 	useEffect(() => {
 		if (isError) {
 			alert(message)
 		}
 
-		if (isSuccess) {
+		if (isSuccess && !updating) {
 			dispatch(close())
 		}
-
-		dispatch(reset())
-	}, [message, isError, dispatch, isSuccess])
+	}, [dispatch, isError, message, isSuccess])
 
 	const changeHandler = (e) => {
 		setFormData((prev) => ({
@@ -60,9 +82,19 @@ const ModalContent = () => {
 		const newQuery = {
 			...formData,
 			query: query ? query : searchValue,
+			id: item.id ? item.id : null,
 		}
 
-		dispatch(addToFav({ item: newQuery, uid: user.uid }))
+		if (!newQuery.query || !newQuery.name) {
+			alert('Заполните поля!')
+			return
+		}
+
+		if (updating) {
+			dispatch(updateFav({ uid: user.uid, item: newQuery }))
+		} else {
+			dispatch(addToFav({ uid: user.uid, item: newQuery }))
+		}
 	}
 
 	const cancel = () => {
@@ -71,16 +103,22 @@ const ModalContent = () => {
 		if (!confirmed) return
 
 		dispatch(close())
+		dispatch(clearItem())
 	}
 
 	return (
 		<div className={classes['modal']}>
 			<div
 				className={classes['modal-overflow']}
-				onClick={() => dispatch(close())}
+				onClick={() => {
+					dispatch(close())
+					dispatch(clearItem())
+				}}
 			></div>
 			<div className={classes['modal-dialog']}>
-				<h2 className={classes['modal-dialog__title']}>Сохранить запрос</h2>
+				<h2 className={classes['modal-dialog__title']}>
+					{updating ? 'Изменить запрос' : 'Сохранить запрос'}
+				</h2>
 
 				<form
 					className={`${classes['modal-form']} ${classes['form']}`}
@@ -92,8 +130,8 @@ const ModalContent = () => {
 						placeholder="Введите"
 						onChange={changeHandler}
 						name="query"
-						value={searchValue}
-						disabled={true}
+						value={query}
+						disabled={updating ? false : true}
 					/>
 					<TextField
 						label={'Название'}
@@ -126,14 +164,12 @@ const ModalContent = () => {
 						<div className={classes['form-resizer__total']}>{maxResults}</div>
 					</div>
 
-					{/* <TextField /> */}
-
 					<div className={classes['form-group']}>
 						<Button variant="cancel" onClick={cancel}>
-							Не сохранить
+							{updating ? 'Не изменять' : 'Не сохранить'}
 						</Button>
 						<Button variant="primary" type="submit">
-							{isLoading ? 'Загрузка...' : 'Сохранить'}
+							{isLoading ? 'Загрузка...' : updating ? 'Изменить' : 'Сохранить'}
 						</Button>
 					</div>
 				</form>

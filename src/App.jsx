@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ProtectedRoute } from './components'
-import { Favorite, Login, Main, Results, Search } from './pages'
+import { Favorite, Favs, Login, Main, Results, Search } from './pages'
 
 const App = () => {
 	return (
@@ -17,8 +17,8 @@ const App = () => {
 						}
 					>
 						<Route path="search" element={<Search />} />
-						<Route path="search/results" element={<Results />} />
-						<Route path="favorite" element={<Favorite />} />
+						{/* <Route path="search/results" element={<Results />} /> */}
+						<Route path="favorite" element={<Favs />} />
 					</Route>
 				</Routes>
 			</Router>

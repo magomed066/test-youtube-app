@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import youtubeService from '../../services/youtubeService'
+import videosService from './videosService'
 
 const initialState = {
 	videos: [],
@@ -8,13 +8,16 @@ const initialState = {
 	isSuccess: false,
 	message: '',
 	searchValue: '',
+	maxResults: 12,
 }
 
 export const search = createAsyncThunk(
-	'result/search',
-	async (query, thunkAPI) => {
+	'videos/search',
+	async ({ query, maxResults }, thunkAPI) => {
 		try {
-			const data = await youtubeService.search(query)
+			const data = await videosService.search(query, maxResults)
+
+			console.log(data)
 
 			return { query, data: data?.items }
 		} catch (error) {
@@ -29,8 +32,8 @@ export const search = createAsyncThunk(
 	},
 )
 
-const resultsSlice = createSlice({
-	name: 'results',
+const videosSlice = createSlice({
+	name: 'videos',
 	initialState,
 	reducers: {
 		reset(state) {
@@ -59,6 +62,6 @@ const resultsSlice = createSlice({
 	},
 })
 
-export const { reset } = resultsSlice.actions
+export const { reset } = videosSlice.actions
 
-export default resultsSlice.reducer
+export default videosSlice.reducer

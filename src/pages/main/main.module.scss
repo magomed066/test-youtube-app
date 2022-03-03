@@ -3,6 +3,10 @@
   min-height: 100vh;
 
   &-content {
-    padding: 4rem 1rem;
+    padding: 4rem 0rem;
+
+    @media screen and (max-width: 500px) {
+      padding: 4rem 1rem;
+    }
   }
 }

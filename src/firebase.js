@@ -8,6 +8,7 @@ import {
 	onSnapshot,
 	getDocs,
 	deleteDoc,
+	updateDoc,
 } from 'firebase/firestore'
 import {
 	onAuthStateChanged,
@@ -41,6 +42,7 @@ export {
 	signOut,
 	onSnapshot,
 	getDoc,
+	updateDoc,
 	deleteDoc,
 	getDocs,
 }

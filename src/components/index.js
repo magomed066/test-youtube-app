@@ -1,16 +1,14 @@
+import ProtectedRoute from './protected-route/ProtectedRoute'
 import Header from './header/Header'
 import SearchBar from './searchbar/SearchBar'
-import Card from './card/Card'
-import ProtectedRoute from './protected-route/ProtectedRoute'
-import FavList from './fav-list/FavList'
-import Spinner from './spinner/Spinner'
-
-//UI
 import Icon from './icon/Icon'
 import TextField from './textfield/TextField'
 import Button from './button/Button'
+import Spinner from './spinner/Spinner'
+import Card from './card/Card'
 import Modal from './modal/Modal'
 import Select from './select/Select'
+import FavList from './fav-list/FavList'
 
 export {
 	Icon,
@@ -18,10 +16,10 @@ export {
 	TextField,
 	Button,
 	Header,
-	FavList,
+	SearchBar,
 	Spinner,
 	Modal,
-	SearchBar,
 	Card,
 	Select,
+	FavList,
 }
