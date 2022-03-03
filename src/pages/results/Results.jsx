@@ -12,6 +12,7 @@ const Results = () => {
 	const [value, setValue] = useState('')
 	const { videos, searchValue, isLoading, message, isError, isSuccess } =
 		useSelector((state) => state.results)
+	const { isLoading: favLoading } = useSelector((state) => state.favorite)
 
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -53,7 +54,7 @@ const Results = () => {
 
 	return (
 		<div className={classes['results']}>
-			{isLoading && <Spinner />}
+			{(isLoading || favLoading) && <Spinner />}
 			<div className="container">
 				<div className={classes['results-wrap']}>
 					<div className={classes['results-header']}>

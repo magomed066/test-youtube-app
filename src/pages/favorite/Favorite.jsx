@@ -19,12 +19,17 @@ const Favorite = () => {
 
 	return (
 		<div className={classes['favorite']}>
-			{/* {isLoading && <h1>Loading...</h1>} */}
-			<h1 className={classes['favorite__title']}>Избранное</h1>
-
-			<div className={classes['favorite-content']}>
-				<FavList items={list} />
-			</div>
+			{list.length ? (
+				<>
+					{' '}
+					<h1 className={classes['favorite__title']}>Избранное</h1>
+					<div className={classes['favorite-content']}>
+						<FavList items={list} />
+					</div>
+				</>
+			) : (
+				<h1 className={classes['favorite__title']}>Ничего нет</h1>
+			)}
 		</div>
 	)
 }

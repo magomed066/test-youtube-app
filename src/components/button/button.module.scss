@@ -1,5 +1,5 @@
 .btn {
-  padding: 1.4rem 0;
+  padding: 1.4rem 2rem;
   border: none;
   border-radius: 1rem;
   background: none;
@@ -10,5 +10,10 @@
   &-primary {
     color: #fff;
     background: #1390E5;
+  }
+
+  &-cancel {
+    color: #1390E5;
+    border: 1px solid #1390E5;
   }
 }

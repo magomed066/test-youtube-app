@@ -7,7 +7,7 @@ class YoutubeService {
 			{
 				params: {
 					part: 'snippet',
-					maxResults: 6,
+					maxResults: 12,
 					key: process.env.REACT_APP_YOUTUBE_API_KEY,
 					q: query,
 				},
@@ -17,7 +17,5 @@ class YoutubeService {
 		return data
 	}
 }
-
-// process.env.REACT_APP_YOUTUBE_API_KEY
 
 export default new YoutubeService()

@@ -11,9 +11,11 @@ const TextField = ({
 	value,
 	placeholder,
 	switchPass,
+	className,
+	disabled,
 }) => {
 	return (
-		<div className={classes['textfield']}>
+		<div className={`${classes['textfield']} ${className}`}>
 			{label && <label htmlFor={id}>{label}</label>}
 
 			<div className={classes['textfield-wrap']}>
@@ -25,6 +27,7 @@ const TextField = ({
 					id={id}
 					value={value}
 					placeholder={placeholder}
+					disabled={disabled}
 				/>
 				{name === 'password' ? (
 					<Icon

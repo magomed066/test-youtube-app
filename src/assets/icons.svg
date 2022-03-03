@@ -41,4 +41,8 @@
     <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
     <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
   </symbol>
+
+   <symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 5" id="arrow-down">
+    <path d="M4.29289 4.29289L0.853553 0.853553C0.538571 0.538571 0.761654 0 1.20711 0H8.79289C9.23835 0 9.46143 0.53857 9.14645 0.853553L5.70711 4.29289C5.31658 4.68342 4.68342 4.68342 4.29289 4.29289Z" fill="#D1D1D1"></path>
+  </symbol>
 </svg>

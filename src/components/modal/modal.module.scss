@@ -1,0 +1,116 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &-overflow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+  }
+
+  &-dialog {
+    position: relative;
+    z-index: 9999;
+    background: #fff;
+    box-shadow: 0px 10px 50px rgba(19, 144, 229, 0.8);
+    border-radius: 10px;
+    padding: 3.6rem 4rem;
+
+
+
+    max-width: 51rem;
+    width: 100%;
+
+    &__title {
+      margin-bottom: 3.6rem;
+      font-size: 1.8rem;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+
+  &-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__input {
+      margin-bottom: 2.4rem;
+
+      label {
+        font-size: 1.6rem;
+        color: #000;
+      }
+
+      input {
+        font-size: 2rem;
+        padding: 1.2rem 1.5rem;
+        max-width: 100%;
+        border: 1px solid rgba(23, 23, 25, 0.3);
+
+
+        &:focus {
+          background: none;
+          border-color: rgba(23, 23, 25, 0.2);
+        }
+      }
+    }
+
+    .form {
+      &-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 3.6rem;
+
+        button {
+
+          max-width: 21rem;
+          width: 100%;
+        }
+      }
+
+      &-resizer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 3rem;
+
+        &__item {
+          max-width: 31rem;
+          width: 100%;
+          outline: none;
+
+          &::-webkit-slider-runnable-track {
+            width: 100%;
+            cursor: pointer;
+            border-radius: 1.3px;
+            border: none;
+          }
+        }
+
+
+        &__total {
+          border: 1px solid rgba(23, 23, 25, 0.2);
+          border-radius: 10px;
+          padding: 1.2rem 0;
+          max-width: 10rem;
+          width: 100%;
+          font-size: 2rem;
+          color: #272727;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

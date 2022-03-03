@@ -6,9 +6,11 @@ import {
 	onSnapshot,
 	collection,
 	getDoc,
+	getDocs,
 	setDoc,
 	signOut,
 	db,
+	deleteDoc,
 } from '../../firebase'
 
 const initialState = {
@@ -23,12 +25,12 @@ export const addToFav = createAsyncThunk(
 	'favorites/add',
 	async (data, thunkAPI) => {
 		try {
-			const { query, uid } = data
+			const { item, uid } = data
 
 			const favQuery = doc(collection(db, `users/${uid}/queries`))
 
 			setDoc(favQuery, {
-				query: query,
+				...item,
 				id: favQuery.id,
 			})
 		} catch (error) {
@@ -43,24 +45,50 @@ export const addToFav = createAsyncThunk(
 	},
 )
 
-export const getFavs = createAsyncThunk('favorites/list', (uid, thunkAPI) => {
-	try {
-		onSnapshot(collection(db, `users/${uid}/queries`), (sn) => {
-			sn.docs.map((doc) => {
-				return thunkAPI.dispatch({
-					type: 'favorites/list/fulfilled',
-					payload: [doc.data()],
-				})
+export const getFavs = createAsyncThunk(
+	'favorites/list',
+	async (uid, thunkAPI) => {
+		try {
+			const docRef = collection(db, `users/${uid}/queries`)
+
+			const res = await getDocs(docRef)
+
+			let d = []
+			res.forEach((doc) => {
+				d.push(doc.data())
 			})
-		})
-	} catch (error) {
-		const message =
-			(error.response && error.response.data && error.response.data.message) ||
-			error.message ||
-			error.toString()
-		return thunkAPI.rejectWithValue(message)
-	}
-})
+
+			return d
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			return thunkAPI.rejectWithValue(message)
+		}
+	},
+)
+
+export const deleteFav = createAsyncThunk(
+	'favorites/delete',
+	async (data, thunkAPI) => {
+		const { item, uid } = data
+		try {
+			await deleteDoc(doc(db, `users/${uid}/queries/${item.id}`))
+			return item
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString()
+			return thunkAPI.rejectWithValue(message)
+		}
+	},
+)
 
 const favoriteSlice = createSlice({
 	name: 'favorite',
@@ -75,8 +103,17 @@ const favoriteSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
+			.addCase(addToFav.pending, (state) => {
+				state.isLoading = true
+			})
 			.addCase(addToFav.fulfilled, (state) => {
+				state.isLoading = false
 				state.isSuccess = true
+			})
+			.addCase(addToFav.rejected, (state, action) => {
+				state.isLoading = false
+				state.isError = true
+				state.message = action.payload
 			})
 			.addCase(getFavs.pending, (state) => {
 				state.isLoading = true
@@ -87,6 +124,20 @@ const favoriteSlice = createSlice({
 				state.list = action.payload
 			})
 			.addCase(getFavs.rejected, (state, action) => {
+				state.isLoading = false
+				state.isError = true
+				state.message = action.payload
+			})
+			.addCase(deleteFav.pending, (state, action) => {
+				state.isLoading = true
+			})
+			.addCase(deleteFav.fulfilled, (state, action) => {
+				console.log(action.payload)
+				state.isLoading = false
+				state.isSuccess = true
+				state.list = state.list.filter((i) => i.id !== action.payload.id)
+			})
+			.addCase(deleteFav.rejected, (state, action) => {
 				state.isLoading = false
 				state.isError = true
 				state.message = action.payload
