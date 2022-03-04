@@ -61,12 +61,7 @@ const FavList = ({ items = [] }) => {
 						<button
 							className={`${classes['list-item__btn']} ${classes['change']}`}
 							onClick={() => {
-								dispatch(
-									search({
-										query: item.query,
-										maxResults: item.maxResults,
-									}),
-								)
+								dispatch(search(item))
 							}}
 						>
 							Выполнить

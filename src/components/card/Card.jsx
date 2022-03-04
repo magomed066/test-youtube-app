@@ -2,10 +2,10 @@ import React from 'react'
 import classes from './card.module.scss'
 import Preview from '../../assets/preview.png'
 
-const Card = ({ item }) => {
+const Card = ({ item, isGrid }) => {
 	const { description, thumbnails, title } = item?.snippet || {}
 	return (
-		<div className={classes['card']}>
+		<div className={`${classes['card']} ${!isGrid ? classes['grid'] : ''}`}>
 			<img
 				src={thumbnails?.high?.url || Preview}
 				alt="preview"

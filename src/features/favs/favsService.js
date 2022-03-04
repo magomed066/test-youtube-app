@@ -20,6 +20,13 @@ const addToFavs = async (item, uid) => {
 		console.log(error)
 	}
 }
+const deleteFav = async (item, uid) => {
+	try {
+		await deleteDoc(doc(db, `users/${uid}/queries/${item.id}`))
+	} catch (error) {
+		console.log(error)
+	}
+}
 const updateFav = async (item, uid) => {
 	console.log(item)
 	try {
@@ -35,10 +42,28 @@ const updateFav = async (item, uid) => {
 		console.log(error)
 	}
 }
+const getFavs = async (uid) => {
+	try {
+		const docRef = collection(db, `users/${uid}/queries`)
+
+		const res = await getDocs(docRef)
+
+		let d = []
+		res.forEach((doc) => {
+			d.push(doc.data())
+		})
+
+		return d
+	} catch (error) {
+		console.log(error)
+	}
+}
 
 const favsService = {
 	addToFavs,
 	updateFav,
+	getFavs,
+	deleteFav,
 }
 
 export default favsService

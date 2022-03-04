@@ -11,16 +11,18 @@ const Favorite = () => {
 		(state) => state.favs,
 	)
 
-	// useEffect(() => {
-	// 	if (isError) {
-	// 		alert(message)
-	// 		dispatch(reset())
-	// 	}
+	useEffect(() => {
+		if (isError) {
+			alert(message)
+			dispatch(reset())
+		}
 
-	// 	if (isSuccess) {
-	// 		dispatch(reset())
-	// 	}
-	// }, [isError, isSuccess, message])
+		if (isSuccess) {
+			dispatch(reset())
+		}
+
+		dispatch(reset())
+	}, [isError, isSuccess, message, dispatch])
 
 	useEffect(() => {
 		dispatch(getFavs(user.uid))

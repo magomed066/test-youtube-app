@@ -9,6 +9,10 @@
   align-items: center;
   justify-content: center;
 
+  @media screen and (max-width: 500px) {
+    display: block;
+  }
+
   &-overflow {
     position: absolute;
     width: 100%;
@@ -24,6 +28,10 @@
     border-radius: 10px;
     padding: 3.6rem 4rem;
 
+    @media screen and (max-width: 500px) {
+      min-height: 100vh;
+      padding: 3rem 2rem;
+    }
 
 
     max-width: 51rem;
@@ -45,16 +53,21 @@
     &__input {
       margin-bottom: 2.4rem;
 
+
       label {
         font-size: 1.6rem;
         color: #000;
       }
+
 
       input {
         font-size: 2rem;
         padding: 1.2rem 1.5rem;
         max-width: 100%;
         border: 1px solid rgba(23, 23, 25, 0.3);
+
+
+
 
 
         &:focus {
@@ -71,10 +84,18 @@
         justify-content: space-between;
         margin-top: 3.6rem;
 
-        button {
+        @media screen and (max-width: 500px) {
+          gap: 2rem;
+        }
 
+        button {
           max-width: 21rem;
           width: 100%;
+
+
+          @media screen and (max-width: 500px) {
+            font-size: 1.6rem;
+          }
         }
       }
 
@@ -84,10 +105,15 @@
         justify-content: space-between;
         margin-top: 3rem;
 
+        @media screen and (max-width: 500px) {
+          gap: 2rem;
+        }
+
         &__item {
           max-width: 31rem;
           width: 100%;
           outline: none;
+
 
           &::-webkit-slider-runnable-track {
             width: 100%;

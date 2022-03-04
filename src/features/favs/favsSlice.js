@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { doc, collection, getDocs, setDoc, db, deleteDoc } from '../../firebase'
 import favsService from './favsService'
 
 const initialState = {
@@ -35,16 +34,7 @@ export const getFavs = createAsyncThunk(
 	'favorites/list',
 	async (uid, thunkAPI) => {
 		try {
-			const docRef = collection(db, `users/${uid}/queries`)
-
-			const res = await getDocs(docRef)
-
-			let d = []
-			res.forEach((doc) => {
-				d.push(doc.data())
-			})
-
-			return d
+			return await favsService.getFavs(uid)
 		} catch (error) {
 			const message =
 				(error.response &&
@@ -57,24 +47,12 @@ export const getFavs = createAsyncThunk(
 	},
 )
 
-// export const getItem = createAsyncThunk('favorites/item', (data, thunkAPI) => {
-// 	try {
-// 		return data
-// 	} catch (error) {
-// 		const message =
-// 			(error.response && error.response.data && error.response.data.message) ||
-// 			error.message ||
-// 			error.toString()
-// 		return thunkAPI.rejectWithValue(message)
-// 	}
-// })
-
 export const deleteFav = createAsyncThunk(
 	'favorites/delete',
 	async (data, thunkAPI) => {
 		const { item, uid } = data
 		try {
-			await deleteDoc(doc(db, `users/${uid}/queries/${item.id}`))
+			await favsService.deleteFav(item, uid)
 			return item
 		} catch (error) {
 			const message =
@@ -116,7 +94,6 @@ const favoriteSlice = createSlice({
 			state.isLoading = false
 			state.isSuccess = false
 			state.message = ''
-			state.updating = false
 		},
 
 		getItem(state, action) {

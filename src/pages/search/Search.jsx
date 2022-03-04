@@ -10,6 +10,7 @@ import classes from './search.module.scss'
 const Search = () => {
 	const [value, setValue] = useState('')
 	const [showContent, setShowContent] = useState(false)
+	const [isGrid, setIsGrid] = useState(true)
 
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
@@ -91,14 +92,31 @@ const Search = () => {
 						</p>
 
 						<div className={classes['search-info-icons']}>
-							<Icon width={24} height={24} icon="list" color="#1717194D" />
-							<Icon width={24} height={24} icon="grid" color="#272727" />
+							<Icon
+								width={24}
+								height={24}
+								icon="list"
+								color={isGrid ? '#1717194D' : '#272727'}
+								onClick={() => setIsGrid(false)}
+							/>
+							<Icon
+								width={24}
+								height={24}
+								icon="grid"
+								color={!isGrid ? '#1717194D' : '#272727'}
+								onClick={() => setIsGrid(true)}
+							/>
 						</div>
 					</div>
 
-					<div className={classes['search-list']}>
+					<div
+						className={`${classes['search-list']} ${
+							isGrid ? classes['grid'] : ''
+						}`}
+					>
 						{videos.map((item) => (
 							<Card
+								isGrid={isGrid}
 								key={
 									item?.id?.videoId ||
 									item?.id?.playlistId ||

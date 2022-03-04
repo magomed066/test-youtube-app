@@ -4,6 +4,7 @@ import { Icon } from '../'
 // import FavPopup from '../favorites-popup/FavPopup'
 import { useDispatch, useSelector } from 'react-redux'
 import { open } from '../../features/modal/modalSlice'
+import FavsPopup from '../favs-popup/FavsPopup'
 
 const SearchBar = ({
 	icon,
@@ -11,7 +12,7 @@ const SearchBar = ({
 	onSubmit = () => {},
 	value,
 }) => {
-	const [isActivePopup] = useState(false)
+	const [isActivePopup, setIsActivePopup] = useState(false)
 	const dispatch = useDispatch()
 	const [isSaved, setIsSaved] = useState(false)
 
@@ -20,6 +21,7 @@ const SearchBar = ({
 	useEffect(() => {
 		if (isSuccess) {
 			setIsSaved(true)
+			setIsActivePopup(true)
 		}
 	}, [isSuccess])
 
@@ -45,7 +47,7 @@ const SearchBar = ({
 						}}
 					/>
 				)}
-				{/* {isActivePopup && <FavPopup />} */}
+				{isActivePopup && <FavsPopup />}
 			</div>
 			<button type="submit" className={classes['searchbar__btn']}>
 				Найти

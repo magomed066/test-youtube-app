@@ -13,11 +13,11 @@ const initialState = {
 
 export const search = createAsyncThunk(
 	'videos/search',
-	async ({ query, maxResults }, thunkAPI) => {
+	async (item, thunkAPI) => {
 		try {
-			const data = await videosService.search(query, maxResults)
+			const { query, maxResults, sort } = item
 
-			console.log(data)
+			const data = await videosService.search(query, maxResults, sort)
 
 			return { query, data: data?.items }
 		} catch (error) {

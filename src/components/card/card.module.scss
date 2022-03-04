@@ -2,6 +2,52 @@
   max-width: 24.5rem;
   width: 100%;
 
+  &.grid {
+    display: flex;
+    max-width: 100%;
+    width: 100%;
+    gap: 3rem;
+    margin-bottom: 3.2rem;
+    width: 100%;
+
+    .card {
+      &__img {
+        max-width: 15.7rem;
+        height: 8.7rem;
+        width: 100%;
+        object-fit: cover;
+        margin: 0;
+      }
+
+      &__title {
+        font-size: 1.6rem;
+      }
+
+      &-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+      }
+
+      &__subtitle {
+        width: 100%;
+        font-size: 1.4rem;
+        color: rgba(23, 23, 25, 0.3);
+
+        // width: 21rem;
+
+        @media screen and (max-width: 500px) {
+          width: 19rem
+        }
+
+        white-space: nowrap;
+        overflow: none;
+        // text-overflow: ellipsis;
+      }
+    }
+  }
+
   &__img {
     margin-bottom: 0.8rem;
     height: 18.3rem;

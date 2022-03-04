@@ -5,15 +5,26 @@ import { Select, TextField } from '../../components'
 import Button from '../button/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { close } from '../../features/modal/modalSlice'
-import { addToFav, clearItem, updateFav } from '../../features/favs/favsSlice'
+import {
+	addToFav,
+	clearItem,
+	updateFav,
+	reset,
+} from '../../features/favs/favsSlice'
 
 const sortData = [
-	{ id: 1, name: 'Дата', value: 'date' },
-	{ id: 2, name: 'Рейтинг', value: 'rating' },
-	{ id: 3, name: 'Кол-во просмотров', value: 'viewCount' },
-	{ id: 4, name: 'Актуальные', value: 'relevance' },
-	{ id: 5, name: 'Заголовки', value: 'title' },
-	{ id: 6, name: 'Кол-во видео', value: 'videoCount' },
+	{
+		id: 1,
+		name: 'Публиковано после (2020)',
+		value: 2020,
+		nameEn: 'publishedAfter',
+	},
+	{
+		id: 2,
+		name: 'Публиковано до (2019)',
+		value: 2019,
+		nameEn: 'publishedBefore',
+	},
 ]
 
 const ModalContent = () => {
@@ -67,6 +78,8 @@ const ModalContent = () => {
 		if (isSuccess && !updating) {
 			dispatch(close())
 		}
+
+		dispatch(reset())
 	}, [dispatch, isError, message, isSuccess])
 
 	const changeHandler = (e) => {
@@ -82,7 +95,7 @@ const ModalContent = () => {
 		const newQuery = {
 			...formData,
 			query: query ? query : searchValue,
-			id: item.id ? item.id : null,
+			id: item?.id ? item?.id : null,
 		}
 
 		if (!newQuery.query || !newQuery.name) {
@@ -140,13 +153,21 @@ const ModalContent = () => {
 						onChange={changeHandler}
 						name="name"
 						value={name}
+						required
 					/>
 
 					<Select
 						label={'Сортировать по'}
 						items={sortData}
 						getData={(data) => {
-							setFormData((prev) => ({ ...prev, sort: data.value }))
+							console.log(data)
+							setFormData((prev) => ({
+								...prev,
+								sort: {
+									value: data.value,
+									sort: data.nameEn,
+								},
+							}))
 						}}
 					/>
 

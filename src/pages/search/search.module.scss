@@ -34,11 +34,15 @@
   }
 
   &-list {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     margin-top: 4rem;
-    gap: 2rem;
+
+    &.grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 4rem;
+      gap: 2rem;
+    }
   }
 
   &-header {
@@ -46,6 +50,11 @@
       margin-top: 0;
       margin-bottom: 1.2rem;
       font-weight: 400;
+
+      @media screen and (max-width: 500px) {
+        font-size: 2rem;
+      }
+
     }
   }
 
@@ -74,7 +83,7 @@
       }
 
       @media screen and (max-width: 500px) {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
       }
     }
   }

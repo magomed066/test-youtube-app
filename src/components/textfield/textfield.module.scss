@@ -4,13 +4,26 @@
 
   align-items: flex-start;
   gap: .4rem;
-  max-width: 33.4rem;
   width: 100%;
 
+  &.disabled {
+    input {
+      background: #FAFAFA;
+      border: 1px solid rgba(23, 23, 25, 0.1);
+    }
+  }
 
   label {
     color: rgba(23, 23, 25, 0.3);
     font-size: 1.6rem;
+
+    &.required {
+      &::before {
+        content: "*";
+        color: red;
+        margin-right: .7rem;
+      }
+    }
   }
 
   &-wrap {
