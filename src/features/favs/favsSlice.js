@@ -137,7 +137,6 @@ const favoriteSlice = createSlice({
 				state.isLoading = true
 			})
 			.addCase(deleteFav.fulfilled, (state, action) => {
-				console.log(action.payload)
 				state.isLoading = false
 				state.isSuccess = true
 				state.list = state.list.filter((i) => i.id !== action.payload.id)

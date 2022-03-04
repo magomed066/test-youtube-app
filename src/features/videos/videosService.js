@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const search = async (query, maxResults, sort) => {
-	console.log(sort)
 	const { data } = await axios.get(
 		'https://www.googleapis.com/youtube/v3/search',
 		{

@@ -28,7 +28,6 @@ const deleteFav = async (item, uid) => {
 	}
 }
 const updateFav = async (item, uid) => {
-	console.log(item)
 	try {
 		const updated = doc(db, `users/${uid}/queries/${item.id}`)
 

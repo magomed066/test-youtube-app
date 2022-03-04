@@ -55,7 +55,6 @@ const ModalContent = () => {
 
 	useEffect(() => {
 		if (updating && item) {
-			console.log(item)
 			setFormData((prev) => ({
 				...prev,
 				maxResults: item.maxResults,
@@ -64,10 +63,6 @@ const ModalContent = () => {
 				sort: item.sort,
 			}))
 		}
-
-		// if (isSuccess) {
-		// 	dispatch(close())
-		// }
 	}, [updating, item, isSuccess])
 
 	useEffect(() => {
@@ -160,7 +155,6 @@ const ModalContent = () => {
 						label={'Сортировать по'}
 						items={sortData}
 						getData={(data) => {
-							console.log(data)
 							setFormData((prev) => ({
 								...prev,
 								sort: {
