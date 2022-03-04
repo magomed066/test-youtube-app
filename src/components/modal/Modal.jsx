@@ -41,7 +41,7 @@ const ModalContent = () => {
 
 	const { user } = useSelector((state) => state.auth)
 	const { searchValue } = useSelector((state) => state.videos)
-	const { isLoading, isSuccess, isError, message, updating, item, list } =
+	const { isLoading, isSuccess, isError, message, updating, item } =
 		useSelector((state) => state.favs)
 
 	useEffect(() => {

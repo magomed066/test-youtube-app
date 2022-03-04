@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Card, Icon, SearchBar } from '../../components'
 import Spinner from '../../components/spinner/Spinner'
-import { close } from '../../features/modal/modalSlice'
 import { reset, search } from '../../features/videos/videosSlice'
 import classes from './search.module.scss'
 

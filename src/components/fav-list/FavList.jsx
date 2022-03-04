@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { deleteFav, reset, getItem } from '../../features/favs/favsSlice'
+import { deleteFav, getItem } from '../../features/favs/favsSlice'
 import { close, open } from '../../features/modal/modalSlice'
 import { search } from '../../features/videos/videosSlice'
 import Spinner from '../spinner/Spinner'
